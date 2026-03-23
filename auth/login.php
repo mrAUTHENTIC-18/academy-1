@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "../config/db.php";
 
@@ -6,35 +7,30 @@ $error = "";
 
 if(isset($_POST['login'])){
 
-$email = trim($_POST['email']);
-$password = $_POST['password'];
+    $email = trim($_POST['email']);
+    $password = $_POST['password'];
 
-$stmt = $conn->prepare("SELECT id, fullname, password FROM users WHERE email=?");
-$stmt->bind_param("s",$email);
-$stmt->execute();
-$result = $stmt->get_result();
+    $stmt = $conn->prepare("SELECT id, fullname, password FROM users WHERE email=?");
+    $stmt->bind_param("s",$email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-if($result->num_rows > 0){
+    if($result->num_rows > 0){
+        $user = $result->fetch_assoc();
+        if(password_verify($password,$user['password'])){
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['fullname'] = $user['fullname'];
 
-$user = $result->fetch_assoc();
-
-if(password_verify($password,$user['password'])){
-
-$_SESSION['user_id'] = $user['id'];
-$_SESSION['fullname'] = $user['fullname'];
-
-header("Location: ../dashboard/index.php");
-exit();
-
-}else{
-$error = "Incorrect password";
+            header("Location: ../dashboard/index.php");
+            exit();
+        }else{
+            $error = "Incorrect password";
+        }
+    }else{
+        $error = "Account not found";
+    }
 }
-
-}else{
-$error = "Account not found";
-}
-
-}
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>

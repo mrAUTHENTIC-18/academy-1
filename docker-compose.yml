@@ -1,0 +1,21 @@
+services:
+  app:
+    build: .
+    container_name: academy_app
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "9000:9000"  # PHP-FPM exposed port
+    restart: always
+
+  db:
+    image: mysql:8.0
+    container_name: academy_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: ida_academy
+      MYSQL_USER: academy_user
+      MYSQL_PASSWORD: StrongPassword123
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "3306:3306"
