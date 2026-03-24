@@ -4,7 +4,7 @@ Technology Stack
 - PHP 8+
 - MySQL
 - Bootstrap 5
-
+- Docker 
 Features
 - User Authentication
 - Dashboard
@@ -16,7 +16,7 @@ Deployment Requirements
 - MySQL Database
 
 Database Setup
-1. Create a database named ida_academy
+1. Created a database named ida_academy
 2. Import database/ida_academy.sql
 
 Environment Variables
