@@ -5,3 +5,10 @@ Dockerfile
 docker-compose.yml
 README.md
 .env
+certbot/
+certbot/conf/
+certbot/www/
+.git
+node_modules
+*.log
+

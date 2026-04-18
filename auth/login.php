@@ -21,8 +21,8 @@ if(isset($_POST['login'])){
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['fullname'] = $user['fullname'];
 
-            header("Location: ../dashboard/index.php");
-            exit();
+            header("Location: /dashboard/index.php");
+exit;
         }else{
             $error = "Incorrect password";
         }
