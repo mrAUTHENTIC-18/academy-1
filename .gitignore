@@ -1,2 +1,6 @@
 .env
 certbot/
+certbot/
+vendor/
+.env
+database/
